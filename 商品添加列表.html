@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../vue.js"></script>
+		<link rel="stylesheet" href="../css/vue1.css">
+
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				<label for="">
+					<h2>好商品添加列表</h2>
+				</label>
+			</div>
+			<div>
+
+				id:
+				<input type="text" v-model="id">
+				name:
+				<input type="text" v-model="name">
+				<input type="button" value="添加" @click="add">
+				<label for="">
+					搜索关键字：
+					<input type="text" v-model="kez">
+				</label>
+			</div>
+			<table :class="style1">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>name</th>
+						<th>itime</th>
+						<th>opnmedg</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					<tr v-for="item in search(kez)" :key="item.id">
+						<td>{{item.id}}</td>
+						<td v-text="item.name"></td>
+						<td>{{item.itime}}</td>
+						<td>
+							<a href="" @click.prevent="dle(item.id)">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					id: '',
+					name: '',
+					kez:'',
+					list: [{
+							id: 1,
+							name: '奥迪',
+							itime: new Date()
+						},
+						{
+							id: 2,
+							name: '宝马',
+							itime: new Date()
+						}
+					]
+				},
+				methods: {
+					add() {
+						var tj = {
+							id: this.id,
+							name: this.name,
+							itime: new Date()
+						}
+						this.list.push(tj)
+						this.id=this.name=""
+					},
+					dle(id){
+						this.list.some((item ,i)=>{
+							if(item.id==id){
+								this.list.splice(i,1);
+								return true;
+							}
+						})
+					},
+					search(kez){
+						var sth = []
+						this.list.forEach(item =>{
+							if(item.name.indexOf(kez ) !=-1){
+								sth.push(item)
+							}
+							
+						})
+						return sth
+						// 
+						// return this.list.filter(item =>{
+						// 	// if(item.name.indexof(kez) !=-1)
+						// 	if(item.name.includes(kez)){
+						// 		return item
+						// 	}
+						// })
+						
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
