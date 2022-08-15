@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>过度动画</title>
+		<script src="../vue.js"></script>
+		<style>
+			.v-enter-active,.v-leave-active{
+				transition:0.04s;
+			}
+			.v-enter,.v-leave-to{
+				opacity: 1;
+			}
+			#sty{
+				height: 100px;
+				width: 100px;
+				border: 3px solid black;
+				margin: 10px 0px 0px 10px;
+				/* transition-property: width, background; *//* 用来是设置元素中参与过度的属性名称
+															none:表示没有属性参与过度效果
+															all：表示所有属性多参与过度效果
+															property：定义需要过度的属性名称列表，用逗号隔开
+				 */
+				/* transition-duration: .25s;/* 设置过度过程需要用多少时间 */
+				/* transition-timing-function: ease-in-out; */ /* */ /* transition-timing-function
+															用来设置过度动画的类型，属性值：
+															linear:以相同的速度完成整个过度过程
+															ease:以慢速开，中间快，结束慢 来完成过度过程
+															ease-in：以慢速开始过度的过程
+															ease-out：以慢速结束的过程
+															ease-in-out：以慢速开始 以慢速结束的过度过程
+				 */
+				/* transition-delay: 3s; *//* 用来设置过度效果何时开始，transition-delay:time, */
+				
+				 transition: width .25s linear 1.9s, background 1s 2s, transform 2s;
+				
+			}
+			#sty:hover{
+				width: 200px;
+				background-color: blue;
+				transform: rotate(180deg);
+			}
+			
+				
+			
+		</style>
+	</head>
+	<body>
+	<div id="sty">
+	
+	</div>
+	
+		<div id="app">
+			<button v-on:click="tag=!tag">tagg</button>
+			<button v-on:click="th">tagh</button>
+			<transition >
+				<h1 v-if=tag>helloubjvjvj</h1>
+			</transition>
+		</div>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					tag:true
+				},
+				methods:{
+					th(){
+						console.log(this.tag)
+					}
+						
+					
+				}
+				
+			})
+		</script>
+	</body>
+</html>
